@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="380dp"
+    android:layout_height="330dp"
+    app:cardCornerRadius="40dp"
+    android:layout_gravity="center">
+
+<LinearLayout android:layout_width="380dp"
+    android:layout_height="330dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_api"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="API End Point"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_semibold"
+        android:textSize="16sp"/>
+    <EditText
+        android:id="@+id/etAPI"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/view_bg"
+        android:backgroundTint="@color/light_white"
+        android:drawableEnd="@drawable/ic_edit"
+        android:hint="https://dummy.api/4623846"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:paddingHorizontal="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="20dp"/>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/hint_color"
+            android:layout_marginEnd="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/red"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+</androidx.cardview.widget.CardView>
