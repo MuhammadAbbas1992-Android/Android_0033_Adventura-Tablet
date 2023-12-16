@@ -10,6 +10,7 @@
     <color name="gray">#5C6363</color>
     <color name="splitter_color">#EDEFEF</color>
     <color name="blue">#1D99DF</color>
+    <color name="bottom_color">#FFFBFE</color>
 
 
 </resources>
