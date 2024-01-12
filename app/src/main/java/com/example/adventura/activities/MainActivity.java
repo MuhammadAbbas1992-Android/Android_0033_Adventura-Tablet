@@ -1,4 +1,4 @@
-package com.example.adventura;
+package com.example.adventura.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
-import com.example.adventura.databinding.ActivityLoginBinding;
+import com.example.adventura.R;
+import com.example.adventura.fragments.RacersFragment;
+import com.example.adventura.fragments.TrackFragment;
 import com.example.adventura.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

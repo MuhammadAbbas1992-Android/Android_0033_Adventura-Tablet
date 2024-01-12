@@ -1,4 +1,4 @@
-package com.example.adventura;
+package com.example.adventura.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+
+import com.example.adventura.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -22,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 
                 // The user isn't logged in
-                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

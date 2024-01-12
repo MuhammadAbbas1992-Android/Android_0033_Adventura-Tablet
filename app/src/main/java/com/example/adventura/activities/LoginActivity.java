@@ -1,4 +1,4 @@
-package com.example.adventura;
+package com.example.adventura.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.adventura.R;
 import com.example.adventura.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {

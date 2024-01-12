@@ -1,4 +1,4 @@
-package com.example.adventura;
+package com.example.adventura.fragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.adventura.R;
 import com.example.adventura.databinding.FragmentRacersBinding;
 
 public class RacersFragment extends Fragment {
