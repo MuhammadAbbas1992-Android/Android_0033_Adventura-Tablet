@@ -10,7 +10,7 @@ public class SharedPref {
     private static SharedPreferences mSharedPref;
     private static Gson gson;
     public static final String KEY_TOKEN = "Token";
-    public static final String KEY_USERDATA = "KartsData";
+    public static final String KEY_BASE_API="https://wallofjobs.com";
 
 
     private SharedPref() {

@@ -11,6 +11,7 @@
     <color name="splitter_color">#EDEFEF</color>
     <color name="blue">#1D99DF</color>
     <color name="bottom_color">#FFFBFE</color>
+    <color name="light_blur">#C6C7C8</color>
 
 
 </resources>

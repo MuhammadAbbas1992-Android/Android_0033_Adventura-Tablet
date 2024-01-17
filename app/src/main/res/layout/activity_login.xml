@@ -8,120 +8,139 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingTop="80dp"
+            android:paddingRight="60dp">
+            <ImageView
+                android:id="@+id/ivAPI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_api" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginTop="100dp"
+            android:paddingHorizontal="180dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:paddingTop="80dp"
-                android:paddingRight="60dp">
-                <ImageView
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_api" />
+                    android:text="ADVENTURA"
+                    android:textSize="72sp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"
+                    android:gravity="center"
+                    android:fontFamily="@font/barlow_condensed_medium"/>
+                <ImageView
+                    android:layout_width="85dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_flag"/>
+
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/view_bg"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Login"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:layout_marginTop="100dp"
-                android:paddingHorizontal="180dp">
+                android:background="@drawable/view_bg"
+                android:text="Email ID"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_marginTop="30dp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+            <EditText
+                android:id="@+id/etEmailId"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/view_bg"
+                android:text="vamsi@graviolainc.com"
+                android:backgroundTint="@color/light_white"
+                android:hint="Enter your email id"
+                android:textColorHint="@color/hint_color"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:paddingHorizontal="15dp"
+                android:layout_marginTop="15dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ADVENTURA"
-                        android:textSize="72sp"
-                        android:textColor="@color/black"
-                        android:textStyle="italic"
-                        android:gravity="center"
-                        android:fontFamily="@font/barlow_condensed_medium"/>
-                    <ImageView
-                        android:layout_width="85dp"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_flag"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/view_bg"
+                android:text="Password"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_marginTop="30dp"/>
 
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
-                    android:background="@drawable/view_bg"
-                    android:fontFamily="@font/inter_semibold"
-                    android:text="Login"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="26sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/view_bg"
-                    android:text="Email ID"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/inter_semibold"
-                    android:layout_marginTop="30dp"/>
-                <EditText
-                    android:id="@+id/etEmailID"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/view_bg"
-                    android:backgroundTint="@color/light_white"
-                    android:hint="Enter your email id"
-                    android:textColorHint="@color/hint_color"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:paddingHorizontal="15dp"
-                    android:layout_marginTop="15dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/view_bg"
-                    android:text="Password"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/inter_semibold"
-                    android:layout_marginTop="30dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="15dp">
 
                 <EditText
                     android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="@drawable/view_bg"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="2222"
+                    android:background="@drawable/et_password_bg"
                     android:backgroundTint="@color/light_white"
-                    android:drawableEnd="@drawable/ic_eye"
                     android:hint="Enter your password"
+                    android:inputType="textPassword"
                     android:textColorHint="@color/hint_color"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:paddingHorizontal="15dp"
-                    android:layout_marginTop="15dp"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginBottom="38dp"
-                    android:background="@drawable/view_bg"
-                    android:backgroundTint="@color/red"
-                    android:text="Login"
-                    android:textAllCaps="false"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:textColor="@color/white"/>
-
+                    android:imeOptions="actionSend"/>
+                <ImageView
+                    android:id="@+id/ivEye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_eye_hide"/>
             </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="38dp"
+                android:background="@drawable/view_bg"
+                android:backgroundTint="@color/red"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
 </LinearLayout>
