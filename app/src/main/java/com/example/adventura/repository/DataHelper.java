@@ -2,9 +2,15 @@ package com.example.adventura.repository;
 
 import android.util.Log;
 
+import com.example.adventura.listeners.LapHitDataListener;
+import com.example.adventura.listeners.RacersDataListener;
+import com.example.adventura.listeners.TrackDataListener;
 import com.example.adventura.listeners.UserLoginDataListener;
+import com.example.adventura.models.LapHitDataRequest;
+import com.example.adventura.models.LapHitDataResponse;
+import com.example.adventura.models.RacersData;
+import com.example.adventura.models.TrackData;
 import com.example.adventura.models.UserLoginData;
-import com.example.adventura.models.UserTokenData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,9 +45,9 @@ public class DataHelper {
             }
         });
     }
-    /*public static void getKartsData(KartsDataListener kartsDataListener)
+    public static void getTrackData(TrackDataListener kartsDataListener)
     {
-        Call<ApiResponse> call= Service.getInstance().getMyApi().listKartsData();
+        Call<ApiResponse> call= Service.getInstance().getMyApi().listTrackData();
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
@@ -51,48 +57,22 @@ public class DataHelper {
                 String jsonString = gson.toJson(apiResponse.getData());
 
                 // Use Gson to deserialize the JSON data into a list of Kart objects
-                Type kartListType = new TypeToken<List<KartsData>>() {}.getType();
-                List<KartsData> kartsDataList = new Gson().fromJson(jsonString, kartListType);
+                Type trackListType = new TypeToken<List<TrackData>>() {}.getType();
+                List<TrackData> kartsDataList = new Gson().fromJson(jsonString, trackListType);
 
-                kartsDataListener.onKartsDataLoaded(kartsDataList);
+                kartsDataListener.onTrackDataLoaded(kartsDataList);
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                kartsDataListener.onKartsDataLoadFailed(t.getMessage());
+                kartsDataListener.onTrackDataLoadFailed(t.getMessage());
             }
         });
     }
-    public static void getKartsActivationStatus(String kart_id, String kart_assign_status, KartsActivationStatusDataListener kartsActivationStatusDataListener)
-    {
-        Call<ApiResponse> call;
-        if (kart_assign_status.equals("1"))
-        {
-            call=Service.getInstance().getMyApi().kartActivateData(kart_id);
-        }
-        else
-        {
-            call=Service.getInstance().getMyApi().kartDeactivateData(kart_id);
-        }
-
-        call.enqueue(new Callback<ApiResponse>() {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-
-                ApiResponse apiResponse=response.body();
-                kartsActivationStatusDataListener.onKartActiveStatusDataLoaded(apiResponse.getData().toString());
-            }
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-
-                kartsActivationStatusDataListener.onKartActiveStatusDataLoadFailed(t.getMessage());
-            }
-        });
-    }
-    public static void sendScannedQRCustomersData(CustomerData customerData, QRCodeScannerDataListener qrCodeScannerDataListener)
+    public static void sendLapCountingData(LapHitDataRequest lapHitDataRequest, LapHitDataListener lapHitDataListener)
     {
 
-        Call<ApiResponse> call= Service.getInstance().getMyApi().scannedQRCustomersData(customerData);
+        Call<ApiResponse> call= Service.getInstance().getMyApi().lapCountingData(lapHitDataRequest);
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
@@ -101,18 +81,18 @@ public class DataHelper {
                 //Extract QRCodeScanner Response from ApiResponse Class
                 Gson gson=new Gson();
                 String jsonString=gson.toJson(apiResponse.getData());
-
-                qrCodeScannerDataListener.onQRCodeScannerDataLoaded(jsonString);
+                LapHitDataResponse lapHitDataResponse =gson.fromJson(jsonString, LapHitDataResponse.class);
+                lapHitDataListener.onLapHitDataLoaded(lapHitDataResponse);
             }
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                qrCodeScannerDataListener.onQRCodeScannerDataFailed(t.getMessage());
+                lapHitDataListener.onLapHitDataLoadFailed(t.getMessage());
             }
         });
     }
-    public static void getSessionsData(SessionsDataListener sessionsDataListener)
+    public static void listRacersData(RacersDataListener racersDataListener)
     {
-        Call<ApiResponse> call= Service.getInstance().getMyApi().listSessionsData();
+        Call<ApiResponse> call= Service.getInstance().getMyApi().listRacersData();
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
@@ -122,50 +102,17 @@ public class DataHelper {
                 String jsonString = gson.toJson(apiResponse.getData());
 
                 // Use Gson to deserialize the JSON data into a list of Kart objects
-                Type sessionListType = new TypeToken<List<SessionData>>() {}.getType();
-                List<SessionData> sessionDataList = new Gson().fromJson(jsonString, sessionListType);
+                Type racersListType = new TypeToken<List<RacersData>>() {}.getType();
+                List<RacersData> sessionDataList = new Gson().fromJson(jsonString, racersListType);
 
-                sessionsDataListener.onSessionsDataLoaded(sessionDataList);
+                racersDataListener.onRacersDataLoaded(sessionDataList);
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                sessionsDataListener.onSessionsDataLoadFailed(t.getMessage());
-            }
-        });
-    }
-    public static void startSessionList(StartSessionData startSessionData, StartSessionListener startSessionListener)
-    {
-        Call<ApiResponse> call= Service.getInstance().getMyApi().sessionList(startSessionData);
-        call.enqueue(new Callback<ApiResponse>() {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-
-                ApiResponse apiResponse=response.body();
-                startSessionListener.onStartSessionLoaded(apiResponse.getData().toString());
-            }
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-
-                startSessionListener.onStartSessionLoadFailed(t.getMessage());
+                racersDataListener.onRacersDataLoadFailed(t.getMessage());
             }
         });
     }
 
-    public static void deleteSessionData(String session_id,String s_user_id,String s_kart_id, DeleteSessionListener deleteSessionListener)
-    {
-        Call<ApiResponse> call= Service.getInstance().getMyApi().deleteSession(session_id,s_user_id,s_kart_id);
-        call.enqueue(new Callback<ApiResponse>() {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                ApiResponse apiResponse=response.body();
-                deleteSessionListener.onDeleteSessionLoaded(apiResponse.getData().toString());
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                deleteSessionListener.onDeleteSessionLoadFailed(t.getMessage());
-            }
-        });
-    }*/
 }
