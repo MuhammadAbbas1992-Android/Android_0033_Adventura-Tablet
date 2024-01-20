@@ -80,7 +80,6 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
 
     private void lapHits(TrackData trackData)
     {
-        Toast.makeText(context,"Yes Lap Hits",Toast.LENGTH_LONG).show();
         LapHitDataRequest lapHitDataRequest=new LapHitDataRequest(trackData.getCurrent_session_id(),trackData.getKart_id());
         try
         {
