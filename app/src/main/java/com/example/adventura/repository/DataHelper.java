@@ -11,6 +11,7 @@ import com.example.adventura.models.LapHitDataResponse;
 import com.example.adventura.models.RacersData;
 import com.example.adventura.models.TrackData;
 import com.example.adventura.models.UserLoginData;
+import com.example.adventura.models.UserTokenData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,13 +32,13 @@ public class DataHelper {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 
                 ApiResponse apiResponse = response.body();
-                Log.d("Abc After",apiResponse+"");
+                Log.d("ABC Login: ",apiResponse.getMessage());
                 //Extract UserTokenData from ApiResponse Class
-                /*Gson gson=new Gson();
+                Gson gson=new Gson();
                 String jsonString=gson.toJson(apiResponse.getData());
-                UserTokenData userTokenData =gson.fromJson(jsonString, UserTokenData.class);*/
+                UserTokenData userTokenData =gson.fromJson(jsonString, UserTokenData.class);
 
-                userLoginDataListener.onUsersLoginDataLoaded(null);
+                userLoginDataListener.onUsersLoginDataLoaded(userTokenData);
             }
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
@@ -53,6 +54,7 @@ public class DataHelper {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 ApiResponse apiResponse = response.body();
 
+                Log.d("ABC Track:",apiResponse.getMessage());
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(apiResponse.getData());
 
@@ -69,7 +71,7 @@ public class DataHelper {
             }
         });
     }
-    public static void sendLapCountingData(LapHitDataRequest lapHitDataRequest, LapHitDataListener lapHitDataListener)
+    public static void sendLapHitsCountData(LapHitDataRequest lapHitDataRequest, LapHitDataListener lapHitDataListener)
     {
 
         Call<ApiResponse> call= Service.getInstance().getMyApi().lapCountingData(lapHitDataRequest);
@@ -77,12 +79,12 @@ public class DataHelper {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 ApiResponse apiResponse = response.body();
-
-                //Extract QRCodeScanner Response from ApiResponse Class
-                Gson gson=new Gson();
-                String jsonString=gson.toJson(apiResponse.getData());
-                LapHitDataResponse lapHitDataResponse =gson.fromJson(jsonString, LapHitDataResponse.class);
-                lapHitDataListener.onLapHitDataLoaded(lapHitDataResponse);
+                Log.d("ABC in LapHits:",apiResponse+"");
+//                //Extract QRCodeScanner Response from ApiResponse Class
+//                Gson gson=new Gson();
+//                String jsonString=gson.toJson(apiResponse.getData());
+//                LapHitDataResponse lapHitDataResponse =gson.fromJson(jsonString, LapHitDataResponse.class);
+                lapHitDataListener.onLapHitDataLoaded(null);
             }
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
@@ -90,26 +92,30 @@ public class DataHelper {
             }
         });
     }
-    public static void listRacersData(RacersDataListener racersDataListener)
+    public static void getRacersData(RacersDataListener racersDataListener)
     {
+        Log.d("ABC in Racers:","");
         Call<ApiResponse> call= Service.getInstance().getMyApi().listRacersData();
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 ApiResponse apiResponse = response.body();
-//                Log.d("Session Data List: \n",apiResponse+"");
-                Gson gson = new Gson();
-                String jsonString = gson.toJson(apiResponse.getData());
 
-                // Use Gson to deserialize the JSON data into a list of Kart objects
-                Type racersListType = new TypeToken<List<RacersData>>() {}.getType();
-                List<RacersData> sessionDataList = new Gson().fromJson(jsonString, racersListType);
+                Log.d("ABC Racers:",apiResponse.getMessage());
+//                Log.d("ABC Racers:",apiResponse.getData()+"");
+//                Gson gson = new Gson();
+//                String jsonString = gson.toJson(apiResponse.getData());
 
-                racersDataListener.onRacersDataLoaded(sessionDataList);
+//                // Use Gson to deserialize the JSON data into a list of Kart objects
+//                Type racersListType = new TypeToken<List<RacersData>>() {}.getType();
+//                List<RacersData> racersDataList = new Gson().fromJson(jsonString, racersListType);
+
+                racersDataListener.onRacersDataLoaded(null);
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Log.d("ABC Racers not Found:",t.getMessage());
                 racersDataListener.onRacersDataLoadFailed(t.getMessage());
             }
         });

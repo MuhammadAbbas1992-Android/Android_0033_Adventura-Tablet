@@ -1,15 +1,14 @@
 package com.example.adventura.utils;
 
-import com.example.adventura.models.KartsData;
-import com.example.adventura.models.SessionData;
-import com.example.adventura.models.TempSession;
+import com.example.adventura.models.RacersData;
+import com.example.adventura.models.TrackData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelperUtils {
-    public static List<KartsData> mykartsDataList=new ArrayList<>();
-    public static List<SessionData> mysessionDataList=new ArrayList<>();
-    public static ArrayList<String> kartNoList=new ArrayList<>();
-    public static ArrayList<TempSession> selectedSessionList =new ArrayList<>();
+    public static List<TrackData> trackDataList=new ArrayList<>();
+    public static List<RacersData> racersDataList=new ArrayList<>();
+//    public static ArrayList<String> kartNoList=new ArrayList<>();
+//    public static ArrayList<TempSession> selectedSessionList =new ArrayList<>();
 }
