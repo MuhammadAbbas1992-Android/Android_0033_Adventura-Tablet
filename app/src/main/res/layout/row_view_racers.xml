@@ -20,6 +20,7 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tvSerialNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
@@ -37,6 +38,7 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tvRacerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Racer Name"
@@ -51,6 +53,7 @@
                 android:gravity="left">
 
                 <TextView
+                    android:id="@+id/tvRacersLaps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="26"
@@ -71,6 +74,7 @@
                     android:textSize="14sp"
                     android:layout_marginHorizontal="7dp"/>
                 <TextView
+                    android:id="@+id/tvRacersHours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00"
@@ -83,6 +87,7 @@
                     android:textColor="@color/gray"
                     android:textSize="14sp"/>
                 <TextView
+                    android:id="@+id/tvRacersMints"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00"
@@ -95,6 +100,7 @@
                     android:textColor="@color/gray"
                     android:textSize="14sp"/>
                 <TextView
+                    android:id="@+id/tvRacersSeconds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00"
@@ -114,12 +120,14 @@
                     android:textSize="14sp"
                     android:layout_marginHorizontal="7dp"/>
                 <TextView
+                    android:id="@+id/tvRacersType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Honda"
                     android:textColor="@color/gray"
                     android:textSize="14sp"/>
                 <TextView
+                    android:id="@+id/tvRacersCapacity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="S2000"
@@ -143,6 +151,7 @@
                     android:textColor="@color/blue"
                     android:fontFamily="@font/barlow_condensed_semibold" />
                 <TextView
+                    android:id="@+id/tvKartNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="02"
@@ -187,7 +196,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:paddingHorizontal="14dp">
+            android:paddingHorizontal="14dp"
+            android:visibility="visible">
 
         </androidx.recyclerview.widget.RecyclerView>
 

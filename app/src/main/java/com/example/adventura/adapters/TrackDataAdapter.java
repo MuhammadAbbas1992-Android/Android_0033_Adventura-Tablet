@@ -32,6 +32,7 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
         this.context=context;
         this.inflater=LayoutInflater.from(this.context);
         progressDialog=new ProgressDialog(this.context);
+        progressDialog.setMessage("Loading... ");
     }
 
     @NonNull
@@ -57,7 +58,6 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
         holder.completedLaps.setText(trackData.getCompleted_laps());
         holder.sLaps.setText(trackData.getS_laps());
         holder.lapsHit.setOnClickListener(view -> lapHits(trackData));
-
     }
 
     @Override
@@ -80,6 +80,8 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
 
     private void lapHits(TrackData trackData)
     {
+        progressDialog.show();
+
         LapHitDataRequest lapHitDataRequest=new LapHitDataRequest(trackData.getCurrent_session_id(),trackData.getKart_id());
         try
         {
@@ -89,14 +91,8 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
                     if (lapHitDataResponses !=null)
                     {
                         progressDialog.dismiss();
-//                        HelperUtils.trackDataList=trackDataList;
-//                        HelperUtils.kartNoList.add("Select Kart");
-//
-//                        for (KartsData kart: HelperUtils.mykartsDataList) {
-//                            HelperUtils.kartNoList.add("Kart "+kart.getKart_no());
-//                        }
-//                        loadRecyclerView();
                         Toast.makeText(context, "Lap hit successfully", Toast.LENGTH_LONG).show();
+                        loadTrackData();
                     }
                     else
                     {
@@ -107,6 +103,40 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
 
                 @Override
                 public void onLapHitDataLoadFailed(String exception) {
+                    progressDialog.dismiss();
+                    Toast.makeText(context, "Error: \n"+exception, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            progressDialog.dismiss();
+            Toast.makeText(context, "Exception:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    private void loadTrackData()
+    {
+        progressDialog.show();
+        try
+        {
+            DataHelper.getTrackData(new TrackDataListener() {
+                @Override
+                public void onTrackDataLoaded(List<TrackData> trackDataList) {
+                    if (trackDataList !=null)
+                    {
+                        HelperUtils.trackDataList.clear();
+                        progressDialog.dismiss();
+                        HelperUtils.trackDataList=trackDataList;
+                        notifyDataSetChanged();
+                    }
+                    else
+                    {
+                        progressDialog.dismiss();
+                        Toast.makeText(context, "No Track data found", Toast.LENGTH_LONG).show();
+                    }
+                }
+                @Override
+                public void onTrackDataLoadFailed(String exception) {
                     progressDialog.dismiss();
                     Toast.makeText(context, "Error: \n"+exception, Toast.LENGTH_LONG).show();
                 }

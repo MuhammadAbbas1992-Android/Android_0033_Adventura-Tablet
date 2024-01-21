@@ -32,7 +32,7 @@ public class DataHelper {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
 
                 ApiResponse apiResponse = response.body();
-                Log.d("ABC Login: ",apiResponse.getMessage());
+
                 //Extract UserTokenData from ApiResponse Class
                 Gson gson=new Gson();
                 String jsonString=gson.toJson(apiResponse.getData());
@@ -54,11 +54,10 @@ public class DataHelper {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 ApiResponse apiResponse = response.body();
 
-                Log.d("ABC Track:",apiResponse.getMessage());
                 Gson gson = new Gson();
                 String jsonString = gson.toJson(apiResponse.getData());
 
-                // Use Gson to deserialize the JSON data into a list of Kart objects
+                // Use Gson to deserialize the JSON data into a list of Track objects
                 Type trackListType = new TypeToken<List<TrackData>>() {}.getType();
                 List<TrackData> kartsDataList = new Gson().fromJson(jsonString, trackListType);
 
@@ -81,10 +80,11 @@ public class DataHelper {
                 ApiResponse apiResponse = response.body();
                 Log.d("ABC in LapHits:",apiResponse+"");
 //                //Extract QRCodeScanner Response from ApiResponse Class
-//                Gson gson=new Gson();
-//                String jsonString=gson.toJson(apiResponse.getData());
-//                LapHitDataResponse lapHitDataResponse =gson.fromJson(jsonString, LapHitDataResponse.class);
-                lapHitDataListener.onLapHitDataLoaded(null);
+                Gson gson=new Gson();
+                String jsonString=gson.toJson(apiResponse.getData());
+                LapHitDataResponse lapHitDataResponse =gson.fromJson(jsonString, LapHitDataResponse.class);
+
+                lapHitDataListener.onLapHitDataLoaded(lapHitDataResponse);
             }
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
@@ -102,7 +102,7 @@ public class DataHelper {
                 ApiResponse apiResponse = response.body();
 
                 Log.d("ABC Racers:",apiResponse.getMessage());
-//                Log.d("ABC Racers:",apiResponse.getData()+"");
+                Log.d("ABC Racers:",apiResponse.getData()+"");
 //                Gson gson = new Gson();
 //                String jsonString = gson.toJson(apiResponse.getData());
 

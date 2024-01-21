@@ -53,13 +53,8 @@ public class RacersFragment extends Fragment {
                     if (racersDataList !=null)
                     {
                         HelperUtils.racersDataList.clear();
-                        progressDialog.dismiss();
                         HelperUtils.racersDataList=racersDataList;
-//                        HelperUtils.kartNoList.add("Select Kart");
-//
-//                        for (KartsData kart: HelperUtils.mykartsDataList) {
-//                            HelperUtils.kartNoList.add("Kart "+kart.getKart_no());
-//                        }
+
                         loadRecyclerView();
                     }
                     else

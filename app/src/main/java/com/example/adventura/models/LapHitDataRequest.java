@@ -6,12 +6,9 @@ public class LapHitDataRequest implements Serializable{
     private String data;
     private String kartid;
 
-    // Default constructor is needed for deserialization
-
     public LapHitDataRequest(String data, String kartid) {
         this.data = data;
         this.kartid = kartid;
     }
-
 }
 

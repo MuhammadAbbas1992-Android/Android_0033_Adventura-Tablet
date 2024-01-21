@@ -50,13 +50,8 @@ public class TrackFragment extends Fragment {
                     if (trackDataList !=null)
                     {
                         HelperUtils.trackDataList.clear();
-                        progressDialog.dismiss();
+//                        progressDialog.dismiss();
                         HelperUtils.trackDataList=trackDataList;
-//                        HelperUtils.kartNoList.add("Select Kart");
-//
-//                        for (KartsData kart: HelperUtils.mykartsDataList) {
-//                            HelperUtils.kartNoList.add("Kart "+kart.getKart_no());
-//                        }
                         loadRecyclerView();
                     }
                     else
