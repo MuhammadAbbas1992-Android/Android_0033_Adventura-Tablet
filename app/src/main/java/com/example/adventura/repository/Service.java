@@ -26,8 +26,7 @@ public class Service {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(loggingInterceptor);*/
 
-
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(SharedPref.read(SharedPref.KEY_BASE_API, "https://wallofjobs.com/"))
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
@@ -42,5 +41,9 @@ public class Service {
 
     public Api getMyApi() {
         return api;
+    }
+
+    public static void removeInstance() {
+        instance = null;
     }
 }

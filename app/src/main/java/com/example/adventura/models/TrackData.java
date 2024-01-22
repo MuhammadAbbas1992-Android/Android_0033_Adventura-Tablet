@@ -37,7 +37,7 @@ public class TrackData implements Serializable {
     private String final_s_status;
     private String completed_laps;
     private String s_laps_time;
-//    private Map<String, String> s_laps_time;
+//    Map<String, String> s_laps_time;
     private String best_lap_time;
     private String total_lap_time;
     private String s_qr_id;
@@ -308,13 +308,6 @@ public class TrackData implements Serializable {
     public void setS_laps_time(String s_laps_time) {
         this.s_laps_time = s_laps_time;
     }
-/*public Map<String, String> getS_laps_time() {
-        return s_laps_time;
-    }
-
-    public void setS_laps_time(Map<String, String> s_laps_time) {
-        this.s_laps_time = s_laps_time;
-    }*/
 
     public String getBest_lap_time() {
         return best_lap_time;

@@ -4,19 +4,18 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.adventura.adapters.RacersDataAdapter;
 import com.example.adventura.adapters.TrackDataAdapter;
 import com.example.adventura.databinding.FragmentRacersBinding;
 import com.example.adventura.listeners.RacersDataListener;
-import com.example.adventura.listeners.TrackDataListener;
 import com.example.adventura.models.RacersData;
-import com.example.adventura.models.TrackData;
 import com.example.adventura.repository.DataHelper;
 import com.example.adventura.utils.HelperUtils;
 
@@ -26,7 +25,7 @@ public class RacersFragment extends Fragment {
 
     private FragmentRacersBinding binding;;
     private ProgressDialog progressDialog;
-    private TrackDataAdapter trackDataAdapter;
+    private RacersDataAdapter racersDataAdapter;
 
     private View view;
     @Override
@@ -52,6 +51,7 @@ public class RacersFragment extends Fragment {
                 public void onRacersDataLoaded(List<RacersData> racersDataList) {
                     if (racersDataList !=null)
                     {
+                        progressDialog.dismiss();
                         HelperUtils.racersDataList.clear();
                         HelperUtils.racersDataList=racersDataList;
 
@@ -79,9 +79,11 @@ public class RacersFragment extends Fragment {
     }
     private void loadRecyclerView()
     {
-        trackDataAdapter =new TrackDataAdapter(getActivity());
-        binding.rvRacers.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        binding.rvRacers.setAdapter(trackDataAdapter);
+        racersDataAdapter =new RacersDataAdapter(getActivity());
+        binding.rvRacers.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvRacers.setAdapter(racersDataAdapter);
         progressDialog.dismiss();
+
+
     }
 }

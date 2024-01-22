@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -15,6 +16,7 @@
             android:textColor="@color/gray"
             android:textSize="14sp"/>
         <TextView
+            android:id="@+id/tvLapNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
@@ -25,44 +27,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
+
         <TextView
+            android:id="@+id/tvLapTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00"
-            android:textColor="@color/gray"
-            android:textSize="14sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="h:"
-            android:textColor="@color/gray"
-            android:textSize="14sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00"
-            android:textColor="@color/gray"
-            android:textSize="14sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="m:"
-            android:textColor="@color/gray"
-            android:textSize="14sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00"
-            android:textColor="@color/gray"
-            android:textSize="14sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="s"
+            android:text="00h:00m:00s"
             android:textColor="@color/gray"
             android:textSize="14sp"
             android:layout_marginRight="35dp"/>
         <TextView
+            android:id="@+id/tvLapDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Delete"

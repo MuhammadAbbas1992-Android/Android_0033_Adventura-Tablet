@@ -13,6 +13,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.example.adventura.listeners.UserLoginDataListener;
 import com.example.adventura.models.UserLoginData;
 import com.example.adventura.models.UserTokenData;
 import com.example.adventura.repository.DataHelper;
+import com.example.adventura.repository.Service;
 import com.example.adventura.utils.HelperUtils;
 
 public class LoginActivity extends AppCompatActivity {
@@ -114,17 +116,16 @@ public class LoginActivity extends AppCompatActivity {
                     binding.etEmailId.getText().toString().trim(),
                     binding.etPassword.getText().toString().trim()
             );
-
             DataHelper.sendUserLoginData(userLoginData,new UserLoginDataListener() {
                 @Override
                 public void onUsersLoginDataLoaded(UserTokenData userTokenData) {
 
                     if(userTokenData !=null)
                     {
-//                        progressDialog.dismiss();
-//                        HelperUtils.kartNoList.clear();
+                        progressDialog.dismiss();
+                        HelperUtils.trackDataList.clear();
 //                        //Save Token in SharedPref to Avoid Login again and again
-//                        SharedPref.write(SharedPref.KEY_TOKEN, userTokenData.getToken());
+                        SharedPref.write(SharedPref.KEY_TOKEN, userTokenData.getToken());
                         startActivity(new Intent(LoginActivity.this,MainActivity.class));
                     }
                     else{
@@ -158,33 +159,31 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-    private void showAPIDialog()
-    {
+
+    private void showAPIDialog() {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_api_end_point);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
 
-        TextView baseAPI=dialog.findViewById(R.id.etAPI);
-        TextView close=dialog.findViewById(R.id.tvClose);
-        TextView done=dialog.findViewById(R.id.tvDone);
+        TextView baseAPI = dialog.findViewById(R.id.etAPI);
+        TextView close = dialog.findViewById(R.id.tvClose);
+        TextView done = dialog.findViewById(R.id.tvDone);
 
-        baseAPI.setText(SharedPref.read(SharedPref.KEY_BASE_API, "https://wallofjobs.com"));
+        baseAPI.setText(SharedPref.read(SharedPref.KEY_BASE_API, "https://wallofjobs.com/"));
 
         close.setOnClickListener(view -> {
             dialog.dismiss();
         });
         done.setOnClickListener(view -> {
-            if(baseAPI.getText().toString().equals("")
-                    || baseAPI.getText().toString().isEmpty())
-            {
-                Toast.makeText(LoginActivity.this,"Please write Base API",Toast.LENGTH_LONG).show();
-            }
-            else
-            {
+            if (baseAPI.getText().toString().equals("")
+                    || baseAPI.getText().toString().isEmpty()) {
+                Toast.makeText(LoginActivity.this, "Please write Base API", Toast.LENGTH_LONG).show();
+            } else {
+                SharedPref.write(SharedPref.KEY_BASE_API, baseAPI.getText().toString());
+                Service.removeInstance();
                 dialog.dismiss();
-                SharedPref.write(SharedPref.KEY_BASE_API,baseAPI.getText().toString().trim());
             }
         });
 

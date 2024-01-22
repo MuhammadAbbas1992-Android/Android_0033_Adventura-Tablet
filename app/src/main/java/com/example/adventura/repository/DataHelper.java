@@ -25,7 +25,6 @@ import retrofit2.Response;
 public class DataHelper {
     public static void sendUserLoginData(UserLoginData userLoginData, UserLoginDataListener userLoginDataListener)
     {
-
         Call<ApiResponse> call= Service.getInstance().getMyApi().userLoginData(userLoginData);
         call.enqueue(new Callback<ApiResponse>() {
             @Override
@@ -78,7 +77,6 @@ public class DataHelper {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 ApiResponse apiResponse = response.body();
-                Log.d("ABC in LapHits:",apiResponse+"");
 //                //Extract QRCodeScanner Response from ApiResponse Class
                 Gson gson=new Gson();
                 String jsonString=gson.toJson(apiResponse.getData());
@@ -94,28 +92,25 @@ public class DataHelper {
     }
     public static void getRacersData(RacersDataListener racersDataListener)
     {
-        Log.d("ABC in Racers:","");
+
         Call<ApiResponse> call= Service.getInstance().getMyApi().listRacersData();
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 ApiResponse apiResponse = response.body();
 
-                Log.d("ABC Racers:",apiResponse.getMessage());
-                Log.d("ABC Racers:",apiResponse.getData()+"");
-//                Gson gson = new Gson();
-//                String jsonString = gson.toJson(apiResponse.getData());
+                Gson gson = new Gson();
+                String jsonString = gson.toJson(apiResponse.getData());
 
-//                // Use Gson to deserialize the JSON data into a list of Kart objects
-//                Type racersListType = new TypeToken<List<RacersData>>() {}.getType();
-//                List<RacersData> racersDataList = new Gson().fromJson(jsonString, racersListType);
+                // Use Gson to deserialize the JSON data into a list of Kart objects
+                Type racersListType = new TypeToken<List<RacersData>>() {}.getType();
+                List<RacersData> racersDataList = new Gson().fromJson(jsonString, racersListType);
 
-                racersDataListener.onRacersDataLoaded(null);
+                racersDataListener.onRacersDataLoaded(racersDataList);
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                Log.d("ABC Racers not Found:",t.getMessage());
                 racersDataListener.onRacersDataLoadFailed(t.getMessage());
             }
         });
