@@ -1,5 +1,7 @@
 package com.example.adventura.repository;
 
+import android.util.Log;
+
 import com.example.adventura.app.SharedPref;
 
 import okhttp3.OkHttpClient;
@@ -9,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Service {
     private static Service instance = null;
     private Api api;
+
     private Service() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -25,13 +28,14 @@ public class Service {
        /* HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.addInterceptor(loggingInterceptor);*/
-
+//        String BASE_URL =SharedPref.read(SharedPref.KEY_BASE_API,"https://wallofjobs.com/");
         Retrofit retrofit = new Retrofit.Builder().baseUrl(SharedPref.read(SharedPref.KEY_BASE_API, "https://wallofjobs.com/"))
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
         api = retrofit.create(Api.class);
     }
+
     public static synchronized Service getInstance() {
         if (instance == null) {
             instance = new Service();

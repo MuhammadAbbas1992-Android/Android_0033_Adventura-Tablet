@@ -13,7 +13,6 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,15 +32,15 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     private Dialog dialog;
     private ProgressDialog progressDialog;
-    private boolean isPasswordVisible=false;
+    private boolean isPasswordVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityLoginBinding.inflate(getLayoutInflater());
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Login... ");
 
         binding.ivAPI.setOnClickListener(view -> {
@@ -84,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             togglePassVisible();
         });
     }
+
     private void togglePassVisible() {
         String pass = binding.etPassword.getText().toString();
 
@@ -91,8 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             binding.etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
             binding.etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             binding.ivEye.setImageResource(R.drawable.ic_eye_hide);
-        } else
-        {
+        } else {
             binding.etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             binding.etPassword.setInputType(InputType.TYPE_CLASS_TEXT);
             binding.ivEye.setImageResource(R.drawable.ic_eye_show);
@@ -100,59 +99,58 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.etPassword.setText(pass);
         binding.etPassword.setSelection(pass.length());
-        isPasswordVisible= !isPasswordVisible;
+        isPasswordVisible = !isPasswordVisible;
     }
-    private void confirmCredentials()
-    {
-        if(binding.etEmailId.getText().toString().isEmpty()
-                || binding.etPassword.getText().toString().isEmpty())
-        {
-            Toast.makeText(LoginActivity.this,"Please fill all fields",Toast.LENGTH_LONG).show();
-        }
-        else
-        {
+
+    private void confirmCredentials() {
+        if (binding.etEmailId.getText().toString().isEmpty()
+                || binding.etPassword.getText().toString().isEmpty()) {
+            Toast.makeText(LoginActivity.this, "Please fill all fields", Toast.LENGTH_LONG).show();
+        } else {
             progressDialog.show();
-            UserLoginData userLoginData =new UserLoginData(
+            UserLoginData userLoginData = new UserLoginData(
                     binding.etEmailId.getText().toString().trim(),
                     binding.etPassword.getText().toString().trim()
             );
-            DataHelper.sendUserLoginData(userLoginData,new UserLoginDataListener() {
-                @Override
-                public void onUsersLoginDataLoaded(UserTokenData userTokenData) {
 
-                    if(userTokenData !=null)
-                    {
-                        progressDialog.dismiss();
-                        HelperUtils.trackDataList.clear();
+            try {
+                DataHelper.sendUserLoginData(userLoginData, new UserLoginDataListener() {
+                    @Override
+                    public void onUsersLoginDataLoaded(UserTokenData userTokenData) {
+
+                        if (userTokenData != null) {
+                            progressDialog.dismiss();
+                            HelperUtils.trackDataList.clear();
 //                        //Save Token in SharedPref to Avoid Login again and again
-                        SharedPref.write(SharedPref.KEY_TOKEN, userTokenData.getToken());
-                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            SharedPref.write(SharedPref.KEY_TOKEN, userTokenData.getToken());
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        } else {
+                            progressDialog.dismiss();
+                            showLoginFailDialog();
+                        }
                     }
-                    else{
+
+                    @Override
+                    public void onUsersLoginDataLoadFailed(String exception) {
                         progressDialog.dismiss();
                         showLoginFailDialog();
                     }
-                }
-                @Override
-                public void onUsersLoginDataLoadFailed(String exception) {
-                    progressDialog.dismiss();
-                    showLoginFailDialog();
-                }
-            });
-        }
+                });
 
+            } catch (Exception e) {
+                progressDialog.dismiss();
+                showLoginFailDialog();
+            }
+        }
     }
-    private void loginBtnEnabled()
-    {
+
+    private void loginBtnEnabled() {
         if (!binding.etEmailId.getText().toString().equals("")
-                && !binding.etPassword.getText().toString().equals(""))
-        {
+                && !binding.etPassword.getText().toString().equals("")) {
             binding.btnLogin.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.red));
             binding.btnLogin.setTextColor(LoginActivity.this.getResources().getColor(R.color.white));
             binding.btnLogin.setEnabled(true);
-        }
-        else
-        {
+        } else {
             binding.btnLogin.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.light_white));
             binding.btnLogin.setTextColor(LoginActivity.this.getResources().getColor(R.color.light_blur));
             binding.btnLogin.setEnabled(false);
@@ -188,16 +186,16 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    private void showLoginFailDialog()
-    {
+
+    private void showLoginFailDialog() {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_login_fail);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
 
-        TextView close=dialog.findViewById(R.id.tv_close);
-        TextView tryAgain=dialog.findViewById(R.id.tvTryAgain);
+        TextView close = dialog.findViewById(R.id.tv_close);
+        TextView tryAgain = dialog.findViewById(R.id.tvTryAgain);
 
         close.setOnClickListener(view -> {
             dialog.dismiss();

@@ -23,35 +23,32 @@ import com.example.adventura.utils.HelperUtils;
 
 import java.util.List;
 
-public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyViewHolder>{
+public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyViewHolder> {
     private Context context;
     private LayoutInflater inflater;
     private ProgressDialog progressDialog;
-    public TrackDataAdapter(Context context)
-    {
-        this.context=context;
-        this.inflater=LayoutInflater.from(this.context);
-        progressDialog=new ProgressDialog(this.context);
+
+    public TrackDataAdapter(Context context) {
+        this.context = context;
+        this.inflater = LayoutInflater.from(this.context);
+        progressDialog = new ProgressDialog(this.context);
         progressDialog.setMessage("Loading... ");
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view =inflater.inflate(R.layout.row_view_track,parent,false);
+        View view = inflater.inflate(R.layout.row_view_track, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        TrackData trackData= HelperUtils.trackDataList.get(position);
+        TrackData trackData = HelperUtils.trackDataList.get(position);
 
-        if(trackData.getKart_no().length()==1)
-        {
-            holder.kartNo.setText("0"+trackData.getKart_no());
-        }
-        else
-        {
+        if (trackData.getKart_no().length() == 1) {
+            holder.kartNo.setText("0" + trackData.getKart_no());
+        } else {
             holder.kartNo.setText(trackData.getKart_no());
         }
 
@@ -65,37 +62,33 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
         return HelperUtils.trackDataList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView kartNo,completedLaps,sLaps;
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView kartNo, completedLaps, sLaps;
         Button lapsHit;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            kartNo =itemView.findViewById(R.id.tvKartNo);
-            completedLaps =itemView.findViewById(R.id.tvCompletedLaps);
-            sLaps =itemView.findViewById(R.id.tvSLaps);
-            lapsHit =itemView.findViewById(R.id.btnLapsHit);
+            kartNo = itemView.findViewById(R.id.tvKartNo);
+            completedLaps = itemView.findViewById(R.id.tvCompletedLaps);
+            sLaps = itemView.findViewById(R.id.tvSLaps);
+            lapsHit = itemView.findViewById(R.id.btnLapsHit);
         }
     }
 
-    private void lapHits(TrackData trackData)
-    {
+    private void lapHits(TrackData trackData) {
         progressDialog.show();
 
-        LapHitDataRequest lapHitDataRequest=new LapHitDataRequest(trackData.getCurrent_session_id(),trackData.getKart_id());
-        try
-        {
+        LapHitDataRequest lapHitDataRequest = new LapHitDataRequest(trackData.getCurrent_session_id(), trackData.getKart_id());
+        try {
             DataHelper.sendLapHitsCountData(lapHitDataRequest, new LapHitDataListener() {
                 @Override
                 public void onLapHitDataLoaded(LapHitDataResponse lapHitDataResponses) {
-                    if (lapHitDataResponses !=null)
-                    {
-                        progressDialog.dismiss();
+                    if (lapHitDataResponses != null) {
+//                        progressDialog.dismiss();
                         Toast.makeText(context, "Lap hit successfully", Toast.LENGTH_LONG).show();
                         loadTrackData();
-                    }
-                    else
-                    {
+                    } else {
                         progressDialog.dismiss();
                         Toast.makeText(context, "Failed to Hit Lap", Toast.LENGTH_LONG).show();
                     }
@@ -104,48 +97,41 @@ public class TrackDataAdapter extends RecyclerView.Adapter<TrackDataAdapter.MyVi
                 @Override
                 public void onLapHitDataLoadFailed(String exception) {
                     progressDialog.dismiss();
-                    Toast.makeText(context, "Error: \n"+exception, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error: \n" + exception, Toast.LENGTH_LONG).show();
                 }
             });
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             progressDialog.dismiss();
-            Toast.makeText(context, "Exception:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Exception:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-    private void loadTrackData()
-    {
-        progressDialog.show();
-        try
-        {
+
+    private void loadTrackData() {
+//        progressDialog.show();
+        try {
             DataHelper.getTrackData(new TrackDataListener() {
                 @Override
                 public void onTrackDataLoaded(List<TrackData> trackDataList) {
-                    if (trackDataList !=null)
-                    {
+                    if (trackDataList != null) {
                         HelperUtils.trackDataList.clear();
                         progressDialog.dismiss();
-                        HelperUtils.trackDataList=trackDataList;
+                        HelperUtils.trackDataList = trackDataList;
                         notifyDataSetChanged();
-                    }
-                    else
-                    {
+                    } else {
                         progressDialog.dismiss();
                         Toast.makeText(context, "No Track data found", Toast.LENGTH_LONG).show();
                     }
                 }
+
                 @Override
                 public void onTrackDataLoadFailed(String exception) {
                     progressDialog.dismiss();
-                    Toast.makeText(context, "Error: \n"+exception, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error: \n" + exception, Toast.LENGTH_LONG).show();
                 }
             });
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             progressDialog.dismiss();
-            Toast.makeText(context, "Exception:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Exception:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

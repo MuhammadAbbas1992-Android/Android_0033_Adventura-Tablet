@@ -10,7 +10,7 @@ public class SharedPref {
     private static SharedPreferences mSharedPref;
     private static Gson gson;
     public static final String KEY_TOKEN = "Token";
-    public static final String KEY_BASE_API="https://wallofjobs.com";
+    public static final String KEY_BASE_API = "https://wallofjobs.com/";
 
 
     private SharedPref() {
@@ -34,6 +34,7 @@ public class SharedPref {
         prefsEditor.commit();
     }
 
+
     public static boolean read(String key, boolean defValue) {
         return mSharedPref.getBoolean(key, defValue);
     }
@@ -53,4 +54,5 @@ public class SharedPref {
         prefsEditor.putFloat(key, value);
         prefsEditor.commit();
     }
+
 }

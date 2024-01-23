@@ -18,24 +18,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         openFragment(new TrackFragment());
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment=null;
-                switch (item.getItemId())
-                {
+                Fragment fragment = null;
+                switch (item.getItemId()) {
                     case R.id.track:
-                        fragment=new TrackFragment();
+                        fragment = new TrackFragment();
                         break;
                     case R.id.racers:
-                        fragment=new RacersFragment();
+                        fragment = new RacersFragment();
                         break;
                 }
                 openFragment(fragment);
@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void openFragment(Fragment fragment)
-    {
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(binding.fragmentLayout.getId(),fragment);
+
+    public void openFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(binding.fragmentLayout.getId(), fragment);
         fragmentTransaction.commit();
     }
 }

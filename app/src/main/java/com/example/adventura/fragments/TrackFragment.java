@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +25,7 @@ public class TrackFragment extends Fragment {
     private FragmentTrackBinding binding;
     private ProgressDialog progressDialog;
     private TrackDataAdapter trackDataAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,50 +33,45 @@ public class TrackFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentTrackBinding.inflate(inflater, container, false);
 
-        progressDialog=new ProgressDialog(getContext());
+        progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading... ");
         progressDialog.show();
 
         loadTrackData();
         return binding.getRoot();
     }
-    private void loadTrackData()
-    {
-        try
-        {
+
+    private void loadTrackData() {
+        try {
             DataHelper.getTrackData(new TrackDataListener() {
                 @Override
                 public void onTrackDataLoaded(List<TrackData> trackDataList) {
-                    if (trackDataList !=null)
-                    {
+                    if (trackDataList != null) {
                         HelperUtils.trackDataList.clear();
 //                        progressDialog.dismiss();
-                        HelperUtils.trackDataList=trackDataList;
+                        HelperUtils.trackDataList = trackDataList;
                         loadRecyclerView();
-                    }
-                    else
-                    {
+                    } else {
                         progressDialog.dismiss();
                         Toast.makeText(getContext(), "No Track data found", Toast.LENGTH_LONG).show();
                     }
                 }
+
                 @Override
                 public void onTrackDataLoadFailed(String exception) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(), "Error: \n"+exception, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Error: \n" + exception, Toast.LENGTH_LONG).show();
                 }
             });
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             progressDialog.dismiss();
-            Toast.makeText(getContext(), "Exception:\n"+e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Exception:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-    private void loadRecyclerView()
-    {
-        trackDataAdapter =new TrackDataAdapter(getActivity());
-        binding.rvTrack.setLayoutManager(new GridLayoutManager(getActivity(),2));
+
+    private void loadRecyclerView() {
+        trackDataAdapter = new TrackDataAdapter(getActivity());
+        binding.rvTrack.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         binding.rvTrack.setAdapter(trackDataAdapter);
         progressDialog.dismiss();
     }

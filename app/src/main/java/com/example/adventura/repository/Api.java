@@ -10,13 +10,16 @@ import retrofit2.http.POST;
 
 public interface Api {
 
-//    String BASE_URL = "https://wallofjobs.com/";
+    //    String BASE_URL = "https://wallofjobs.com/";
     @POST("m_lc_login")
     Call<ApiResponse> userLoginData(@Body UserLoginData body);
+
     @GET("m_get_tracklist")
     Call<ApiResponse> listTrackData();
+
     @POST("m_lap_hit")
     Call<ApiResponse> lapCountingData(@Body LapHitDataRequest body);
+
     @GET("m_get_racerslist")
     Call<ApiResponse> listRacersData();
 }

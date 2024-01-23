@@ -30,7 +30,7 @@
         android:backgroundTint="@color/light_white"
         android:drawableEnd="@drawable/ic_edit"
         android:hint="https://dummy.api/4623846"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/hint_color"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:paddingHorizontal="15dp"
