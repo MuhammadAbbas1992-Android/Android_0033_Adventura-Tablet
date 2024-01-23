@@ -37,7 +37,6 @@ public class TrackData implements Serializable {
     private String final_s_status;
     private String completed_laps;
     private String s_laps_time;
-//    Map<String, String> s_laps_time;
     private String best_lap_time;
     private String total_lap_time;
     private String s_qr_id;

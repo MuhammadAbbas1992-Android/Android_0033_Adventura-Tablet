@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_racers_inner"
     android:layout_width="match_parent"
     android:layout_height="42dp"
     android:gravity="center"
@@ -44,7 +45,8 @@
             android:textSize="14sp"
             android:fontFamily="@font/inter_semibold"
             android:textColor="@color/red"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -74,15 +74,15 @@ public class RacersDataAdapter extends RecyclerView.Adapter<RacersDataAdapter.My
                         HelperUtils.lapTimeList.clear();
 //                        String jsonString = "{\"s_laps_time\":{\"lap_0\":\"2024-01-22 18:54:04\",\"lap_1\":\"2024-01-22 19:10:45\",\"lap_2\":\"2024-01-22 19:10:52\"}}";
 //
-                        String jsonString = "{\"lap_0\":\"2024-01-22 00:00:29\",\"lap_1\":\"2024-01-22 00:42:38\",\"lap_2\":\"2024-01-22 00:46:54\",\"lap_3\":\"2024-01-22 00:47:00\",\"lap_4\":\"2024-01-22 00:47:12\",\"lap_5\":\"2024-01-22 00:47:20\"}";
+//                        String jsonString = "{\"lap_0\":\"2024-01-22 00:00:29\",\"lap_1\":\"2024-01-22 00:42:38\",\"lap_2\":\"2024-01-22 00:46:54\",\"lap_3\":\"2024-01-22 00:47:00\",\"lap_4\":\"2024-01-22 00:47:12\",\"lap_5\":\"2024-01-22 00:47:20\"}";
 
-                        Gson gson = new Gson();
-                        Type mapType = new com.google.gson.reflect.TypeToken<Map<String, String>>() {
-                        }.getType();
-                        Map<String, String> lapTimes = gson.fromJson(jsonString, mapType);
+//                        Gson gson = new Gson();
+//                        Type mapType = new com.google.gson.reflect.TypeToken<Map<String, String>>() {
+//                        }.getType();
+//                        Map<String, String> lapTimes = gson.fromJson(racersData.getS_laps_time(), mapType);
 
                         // Now you can use lapTimes map as needed
-                        for (Map.Entry<String, String> entry : lapTimes.entrySet()) {
+                        for (Map.Entry<String, String> entry : racersData.getS_laps_time().entrySet()) {
                             HelperUtils.lapNoList.add(entry.getKey());
                             HelperUtils.lapTimeList.add(entry.getValue());
                         }

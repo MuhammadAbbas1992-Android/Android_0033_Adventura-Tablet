@@ -1,6 +1,7 @@
 package com.example.adventura.models;
 
 import java.io.Serializable;
+import java.util.Map;
 
 public class RacersData implements Serializable {
     private String kart_no;
@@ -11,6 +12,7 @@ public class RacersData implements Serializable {
     private String total_laps;
     private String completed_laps;
     private String total_lap_time;
+    private Map<String, String> s_laps_time;
 
     public RacersData() {
     }
@@ -77,5 +79,13 @@ public class RacersData implements Serializable {
 
     public void setTotal_lap_time(String total_lap_time) {
         this.total_lap_time = total_lap_time;
+    }
+
+    public Map<String, String> getS_laps_time() {
+        return s_laps_time;
+    }
+
+    public void setS_laps_time(Map<String, String> s_laps_time) {
+        this.s_laps_time = s_laps_time;
     }
 }

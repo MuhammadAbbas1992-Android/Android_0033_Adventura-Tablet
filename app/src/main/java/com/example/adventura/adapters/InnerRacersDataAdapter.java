@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,13 +38,16 @@ public class InnerRacersDataAdapter extends RecyclerView.Adapter<InnerRacersData
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-//        HelperUtils.lapNoList.get(position);
-//        HelperUtils.lapTimeList.get(position);
-        holder.lapNo.setText(position+"");
+        holder.lapNo.setText((position+1)+"");
 
-        String[] splitDateTime=HelperUtils.lapTimeList.get(position).split(" ");
-        String[] time=splitDateTime[1].split(":");
+        String[] time=HelperUtils.lapTimeList.get(position).split(":");
         holder.lapTime.setText(time[0]+"h:"+time[1]+"m:"+time[2]+"s:");
+
+        if((position%2)==0)
+        {
+            holder.layoutRacersInner.setBackgroundColor(context.getResources().getColor(R.color.white));
+        }
+
     }
 
     @Override
@@ -54,12 +58,14 @@ public class InnerRacersDataAdapter extends RecyclerView.Adapter<InnerRacersData
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView lapNo,lapTime,lapDelete;
+        LinearLayout layoutRacersInner;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             lapNo =itemView.findViewById(R.id.tvLapNo);
             lapTime =itemView.findViewById(R.id.tvLapTime);
             lapDelete =itemView.findViewById(R.id.tvLapDelete);
+            layoutRacersInner =itemView.findViewById(R.id.ll_racers_inner);
         }
     }
 }
