@@ -5,7 +5,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +48,10 @@ public class TrackFragment extends Fragment {
             DataHelper.getTrackData(new TrackDataListener() {
                 @Override
                 public void onTrackDataLoaded(List<TrackData> trackDataList) {
-                    if (trackDataList != null) {
+                    if (trackDataList != null && !trackDataList.isEmpty()) {
                         HelperUtils.trackDataList.clear();
-//                        progressDialog.dismiss();
                         HelperUtils.trackDataList = trackDataList;
+
                         loadRecyclerView();
                     } else {
                         progressDialog.dismiss();
@@ -72,6 +74,7 @@ public class TrackFragment extends Fragment {
     private void loadRecyclerView() {
         trackDataAdapter = new TrackDataAdapter(getActivity());
         binding.rvTrack.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+//        binding.rvTrack.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rvTrack.setAdapter(trackDataAdapter);
         progressDialog.dismiss();
     }

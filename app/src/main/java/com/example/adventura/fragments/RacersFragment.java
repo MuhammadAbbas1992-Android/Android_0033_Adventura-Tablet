@@ -23,7 +23,7 @@ import java.util.List;
 public class RacersFragment extends Fragment {
 
     private FragmentRacersBinding binding;
-    ;
+   
     private ProgressDialog progressDialog;
     private RacersDataAdapter racersDataAdapter;
 
@@ -49,7 +49,7 @@ public class RacersFragment extends Fragment {
             DataHelper.getRacersData(new RacersDataListener() {
                 @Override
                 public void onRacersDataLoaded(List<RacersData> racersDataList) {
-                    if (racersDataList != null) {
+                    if (racersDataList != null && !racersDataList.isEmpty()) {
                         progressDialog.dismiss();
                         HelperUtils.racersDataList.clear();
                         HelperUtils.racersDataList = racersDataList;

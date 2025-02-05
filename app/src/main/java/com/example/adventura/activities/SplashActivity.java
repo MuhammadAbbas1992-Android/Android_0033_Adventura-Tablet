@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.example.adventura.R;
+import com.example.adventura.app.SharedPref;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -23,10 +24,18 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                // The user isn't logged in
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                if(SharedPref.read(SharedPref.KEY_TOKEN,"").isEmpty()
+                        ||SharedPref.read(SharedPref.KEY_TOKEN,"")==null)
+                {
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
 
 

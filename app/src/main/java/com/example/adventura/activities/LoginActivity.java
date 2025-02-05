@@ -124,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        //Save Token in SharedPref to Avoid Login again and again
                             SharedPref.write(SharedPref.KEY_TOKEN, userTokenData.getToken());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
                         } else {
                             progressDialog.dismiss();
                             showLoginFailDialog();
